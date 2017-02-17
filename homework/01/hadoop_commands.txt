@@ -1,0 +1,17 @@
+misc commands
+
+Upload file
+hdfs dfs -put ~/Documents/ds503/homework/_01/data/word_count.csv /user/tom/input/word_count
+
+Run job
+hadoop jar ~/Documents/ds503/homework/_01/out/artifacts/WordCount/_01.jar ds503.WordCount /user/tom/input/word_count /user/tom/output/word_count
+
+Delete META-INF
+zip -d ~/Documents/ds503/homework/_01/out/artifacts/Job1/_01.jar META-INF/LICENSE
+
+Download dir/file
+hdfs dfs -get /user/tom/output/homework1/job1 ~/Desktop
+
+zip -d Job3/_01.jar META-INF/LICENSE
+hdfs dfs -rm -r /output/job3
+hadoop jar Job3/_01.jar ds503.Job3 /user/tom/input/word_count /user/tom/output/word_count
