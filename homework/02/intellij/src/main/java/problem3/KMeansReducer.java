@@ -12,6 +12,10 @@ import java.util.Iterator;
  */
 public class KMeansReducer extends Reducer<Text, Text, IntWritable, Text> {
 
+    public static enum Counter {
+        CONVERGED
+    }
+
     private final static IntWritable keyOut = new IntWritable();
     private final static Text valueOut = new Text();
 

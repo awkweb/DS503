@@ -110,7 +110,7 @@ public class Job4 {
             for (CountryCodeItem countryCodeItem : countryCodeMap.values()) {
                 Text keyOut = new Text(Integer.toString(countryCodeItem.countryCode));
 
-                String transactionString = String.format("%s, %s, %s, %s", countryCodeItem.countryCode,
+                String transactionString = String.format("%s,%s,%s,%s", countryCodeItem.countryCode,
                         countryCodeItem.numberOfCustomers, countryCodeItem.minTransTotal, countryCodeItem.maxTransTotal);
                 Text valueOut = new Text(transactionString);
 

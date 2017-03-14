@@ -75,7 +75,7 @@ public class Job3 {
                 }
             }
 
-            String transactionString = String.format("%s, %s, %s, %s, %s, %s", customerId, customerName, customerSalary,
+            String transactionString = String.format("%s,%s,%s,%s,%s,%s", customerId, customerName, customerSalary,
                     numTransactions, totalSum, minItems);
             Text outValue = new Text(transactionString);
             context.write(null, outValue);
