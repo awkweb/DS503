@@ -2,3 +2,4 @@
 *.iso
 *.vdi
 *.~lock*
+.ipynb_checkpoints
