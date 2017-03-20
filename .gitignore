@@ -1,4 +1,6 @@
-*.csv
+homework/01/_01/input/*.csv
+homework/02/intellij/input/
+homework/03/data/
 *.iso
 *.vdi
 *.~lock*
