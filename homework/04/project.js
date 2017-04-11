@@ -213,7 +213,7 @@ cursor = db.test.find(
     }
 ).sort({ 'name.last': 1 });
 print("========================================================================");
-print("6");
+print("10");
 print("========================================================================");
 cursor.forEach(printjson);
 
@@ -224,14 +224,51 @@ cursor.forEach(printjson);
 
 
 // 12) Delete from all documents the “death” field.
+db.test.update(
+	{},
+	{
+		$unset: {
+			death: 1
+		}
+	},
+	{
+		multi: true
+	}
+);
 
 
 // 13) Delete from all documents any award given on 2011.
+match_year = 1999
+db.test.update(
+	{
+		"awards.year": match_year
+    },
+    {
+		$pull: {
+			awards: {
+				year: match_year
+			}
+		}
+    },
+    {
+		multi: true
+	}
+);
 
 
 // 14) Update the award of document _id =30, which is given by WPI, and set the year
 // to 1965.
-
+db.test.update(
+   	{
+   		_id: 30,
+   		"awards.by": "WPI"
+   	},
+   	{
+   		$set: {
+   			"awards.$.year": 1965
+   		}
+   	}
+);
 
 // 15) Add (copy) all the contributions of document _id = 3 to that of document _id = 30
 
