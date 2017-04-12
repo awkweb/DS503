@@ -221,7 +221,13 @@ cursor.forEach(printjson);
 // 11) Report the distinct organization that gave awards. This information can be found
 // in the “by” field inside the “awards” array. The output should be an array of the
 // distinct values, e.g., [“wpi’, “acm’, ...]
-
+cursor = db.test.distinct(
+	'awards.by'
+)
+print("========================================================================");
+print("11");
+print("========================================================================");
+cursor.forEach(printjson);
 
 // 12) Delete from all documents the “death” field.
 db.test.update(
@@ -238,7 +244,7 @@ db.test.update(
 
 
 // 13) Delete from all documents any award given on 2011.
-match_year = 1999
+match_year = 2011
 db.test.update(
 	{
 		"awards.year": match_year
@@ -294,7 +300,19 @@ db.test.update(
 
 // 16) Report only the names (first and last) of those individuals who won at least two
 // awards in 2001.
-
+cursor=db.test.find(
+	{
+		awards.count('awards.year':2001):{ $gte: 2 }
+	},
+	{
+		_id:0,
+		name:1,
+	}
+);
+print("========================================================================");
+print("16");
+print("========================================================================");
+cursor.forEach(printjson);
 
 // 17) Report the document with the largest id. First, you need to find the largest _id
 // (using a CRUD statement), and then use that to report the corresponding document.
