@@ -11,18 +11,18 @@ db = conn.getDB("local");
 
 
 // 2) Write a CRUD operation(s) that changes the _id of “John McCarthy” to value 2.
-// doc = db.test.findOne(
-//	  {
-// 		name: {
-//             first: "John",
-//             last: "McCarthy"
-//         }
-//     }
-// );
-// old_id = doc._id;
-// doc._id = 2;
-// db.test.insert(doc);
-// db.test.remove({_id: old_id});
+doc = db.test.findOne(
+	  {
+		name: {
+            first: "John",
+            last: "McCarthy"
+        }
+    }
+);
+old_id = doc._id;
+doc._id = 2;
+db.test.insert(doc);
+db.test.remove({_id: old_id});
 
 
 // 3) Write a CRUD operation(s) that inserts the following new records into the
@@ -271,6 +271,25 @@ db.test.update(
 );
 
 // 15) Add (copy) all the contributions of document _id = 3 to that of document _id = 30
+doc = db.test.findOne(
+	{
+        _id: 3
+    },
+    {
+    	_id: 0,
+    	contribs: 1
+    }
+);
+contribs = doc.contribs;
+
+db.test.update(
+	{
+        _id: 30
+	},
+   	{
+		$push: { contribs: { $each: contribs } }
+   }
+);
 
 
 // 16) Report only the names (first and last) of those individuals who won at least two
@@ -279,13 +298,39 @@ db.test.update(
 
 // 17) Report the document with the largest id. First, you need to find the largest _id
 // (using a CRUD statement), and then use that to report the corresponding document.
+cursor = db.test.find().sort({ _id: -1 }).limit(1);
+max_id = cursor.next()._id
+doc = db.test.findOne(
+	{
+		_id: max_id
+    }
+);
+print("========================================================================");
+print("17");
+print("========================================================================");
+print(doc);
 
 
 // 18) Report only one document where one of the awards is given by “ACM”.
-
+cursor = db.test.find(
+	{
+		awards: {
+        	$elemMatch: {
+            	by: "ACM"
+        	}
+      	}
+	}
+);
+print("========================================================================");
+print("18");
+print("========================================================================");
+cursor.forEach(printjson);
 
 // 19) Delete the documents inserted in Q3, i.e., _id = 20 and 30.
-
+db.test.remove({_id: { $in: [20, 30] }});
 
 // 20) Report the number of documents in the collection.
-
+print("========================================================================");
+print("20");
+print("========================================================================");
+print(db.test.count());
