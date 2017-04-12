@@ -11,18 +11,17 @@ db = conn.getDB("local");
 
 
 // 2) Write a CRUD operation(s) that changes the _id of “John McCarthy” to value 2.
-doc = db.test.findOne(
+db.test.update(
 	  {
-		name: {
-            first: "John",
-            last: "McCarthy"
+		"name": {
+            "first": "John",
+            "last": "McCarthy"
         }
-    }
+	  },
+	{
+		  $set: {"_id":2}
+	}
 );
-old_id = doc._id;
-doc._id = 2;
-db.test.insert(doc);
-db.test.remove({_id: old_id});
 
 
 // 3) Write a CRUD operation(s) that inserts the following new records into the
@@ -166,29 +165,26 @@ db.test.update(
 // Then, the output should be similar to: a.
 // { Contribution: “C++”, People: [{first: “Alex”, last: “Chen”},
 // {first: “David”, last: “Mark”}]}, { Contribution: “Simula”, ....}
-result = db.test.findOne(
+var contributions=[];
+result = db.test.find(
 	{
         name: {
             "first": "Alex",
             "last": "Chen"
         }
-    },
-    {
-    	_id: 1,
-    	contribs: 1
     }
-);
+).forEach(
+	function(u){
+		contributions=u.contribs
+	}
+	);
 cursor = db.test.find(
 	{
 		contribs: {
 			$elemMatch: {
-				$in: result.contribs
+				$in: contributions
 			}
 		},
-		_id: {
-			$ne: result._id
-		}
-    },
     {
 		_id: 0,
 		name: 1,
