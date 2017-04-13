@@ -296,14 +296,15 @@ db.test.update(
 
 // 16) Report only the names (first and last) of those individuals who won at least two
 // awards in 2001.
-cursor=db.test.find(
-	{
-		awards.count('awards.year':2001):{ $gte: 2 }
-	},
-	{
-		_id:0,
-		name:1,
-	}
+aggre=db.test.aggregate(
+	[
+		{$unwind:"$awards"},
+		{$match:{'awards.year':2001}},
+		{$group:{_id: "$name",count:{$sum:1}}}
+		]
+	);
+cursor=db.aggre.find(
+	{"count":{ $gte: 2 }}
 );
 print("========================================================================");
 print("16");
