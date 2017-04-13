@@ -321,14 +321,8 @@ print(doc);
 
 
 // 18) Report only one document where one of the awards is given by “ACM”.
-cursor = db.test.find(
-	{
-		awards: {
-        	$elemMatch: {
-            	by: "ACM"
-        	}
-      	}
-	}
+cursor = db.test.findOne(
+	{'awards.by': "ACM"}	
 );
 print("========================================================================");
 print("18");
