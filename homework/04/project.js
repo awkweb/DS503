@@ -178,18 +178,12 @@ result = db.test.find(
 		contributions=u.contribs
 	}
 	);
-cursor = db.test.find(
-	{
-		contribs: {
-			$elemMatch: {
-				$in: contributions
-			}
-		},
-    {
-		_id: 0,
-		name: 1,
-		contribs: 1
-    }
+cursor = db.test.aggregate(
+        [
+        	{$unwind:"$contribs"},
+		{$match:{'contribs':{$in: contributions}}},
+		{$group:{_id: "$contribs",people:{$push:"$name"}}}
+            ]
 );
 print("========================================================================");
 print("9");
@@ -296,16 +290,16 @@ db.test.update(
 
 // 16) Report only the names (first and last) of those individuals who won at least two
 // awards in 2001.
-aggre=db.test.aggregate(
+cursor=db.test.aggregate(
 	[
 		{$unwind:"$awards"},
 		{$match:{'awards.year':2001}},
-		{$group:{_id: "$name",count:{$sum:1}}}
+		{$group:{_id: "$name",count:{$sum:1}}},
+                {$match:{count:{$gte: 2}}},
+                {$project:{name:1}}
 		]
 	);
-cursor=db.aggre.find(
-	{"count":{ $gte: 2 }}
-);
+
 print("========================================================================");
 print("16");
 print("========================================================================");
