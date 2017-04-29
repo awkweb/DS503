@@ -6,26 +6,26 @@ conn = new Mongo();
 db = conn.getDB("local");
 
 // PARENT REFERENCES
-// new_categories = [
-// 	{ _id: "MongoDB", parent: "Databases" },
-// 	{ _id: "dbm", parent: "Databases" },
-// 	{ _id: "Databases", parent: "Programming" },
-// 	{ _id: "Languages", parent: "Programming" },
-// 	{ _id: "Programming", parent: "Books" },
-// 	{ _id: "Books", parent: null },
-// ];
-// db.categories.insert(new_categories);
+new_categories = [
+ 	{ _id: "MongoDB", parent: "Databases" },
+ 	{ _id: "dbm", parent: "Databases" },
+ 	{ _id: "Databases", parent: "Programming" },
+	{ _id: "Languages", parent: "Programming" },
+ 	{ _id: "Programming", parent: "Books" },
+	{ _id: "Books", parent: null },
+];
+db.categories.insert(new_categories);
 
 // CHILD REFERENCES
-// new_categories2 = [
-// 	{ _id: "MongoDB", children: [] },
-// 	{ _id: "dbm", children: [] },
-// 	{ _id: "Databases", children: ["dbm", "MongoDB"] },
-// 	{ _id: "Languages", children: [] },
-// 	{ _id: "Programming", children: ["Databases", "Languages"] },
-// 	{ _id: "Books", children: ["Programming"] },
-// ];
-// db.categories2.insert(new_categories2);
+new_categories2 = [
+	{ _id: "MongoDB", children: [] },
+ 	{ _id: "dbm", children: [] },
+	{ _id: "Databases", children: ["dbm", "MongoDB"] },
+	{ _id: "Languages", children: [] },
+ 	{ _id: "Programming", children: ["Databases", "Languages"] },
+ 	{ _id: "Books", children: ["Programming"] },
+ ];
+db.categories2.insert(new_categories2);
 
 
 // 1) Assume we model the records and relationships in Figure 1 using the
