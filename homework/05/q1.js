@@ -17,15 +17,15 @@ db = conn.getDB("local");
 // db.categories.insert(new_categories);
 
 // CHILD REFERENCES
-new_categories2 = [
-	{ _id: "MongoDB", children: [] },
-	{ _id: "dbm", children: [] },
-	{ _id: "Databases", children: ["dbm", "MongoDB"] },
-	{ _id: "Languages", children: [] },
-	{ _id: "Programming", children: ["Databases", "Languages"] },
-	{ _id: "Books", children: ["Programming"] },
-];
-db.categories2.insert(new_categories2);
+// new_categories2 = [
+// 	{ _id: "MongoDB", children: [] },
+// 	{ _id: "dbm", children: [] },
+// 	{ _id: "Databases", children: ["dbm", "MongoDB"] },
+// 	{ _id: "Languages", children: [] },
+// 	{ _id: "Programming", children: ["Databases", "Languages"] },
+// 	{ _id: "Books", children: ["Programming"] },
+// ];
+// db.categories2.insert(new_categories2);
 
 
 // 1) Assume we model the records and relationships in Figure 1 using the
