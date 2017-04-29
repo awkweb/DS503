@@ -10,5 +10,5 @@
 tom
 > chown tom /data/db  # Set permissions
 > mongoimport --db local --collection test --drop --file ./data.json --jsonArray  # Add data to MongoDB
-> mongo 127.0.0.1:27017/local project.js  # Run homework script
+> mongo 127.0.0.1:27017/local <name of script>.js  # Run homework script q1 or q2
 ```

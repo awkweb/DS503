@@ -1,3 +1,6 @@
+// Question 2
+// ===========================================================================
+
 // 0) Connect to Mongo
 conn = new Mongo();
 db = conn.getDB("local");
